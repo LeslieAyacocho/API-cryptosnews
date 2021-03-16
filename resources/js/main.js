@@ -1,4 +1,6 @@
 import crypto from './crypto' 
+import auth from './modals/authM'
+import news from './news' 
 $(document).ready(function(){
 
 $('.link').on('click', (e) => {
@@ -10,13 +12,12 @@ $('.link').on('click', (e) => {
             crypto('coins');
             break;
 
-        
+        case "news":
+            news('news');
+            break;
+
         default:
             break;
         }
-
-});
-
-
-
+    });
 });

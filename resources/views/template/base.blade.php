@@ -29,16 +29,19 @@
         <a href="#" class="nav-link link" style="color: #222831;" data-id="crypto">CryptoCurrency</a>
         </li>
         <li class="nav-item">
-        <a href="#" class="nav-link link" style="color: #222831;"data-id="Producer">Stock Market</a>
+        <a href="#" class="nav-link link" style="color: #222831;"data-id="news">News</a>
         </li>
     </ul>
-
-    <!-- <ul class="form-inline my-2 my-lg-0">
-        <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button>
-        <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#registerModal">REGISTER</button>
-    </ul> -->
-        
-
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button>
+            </li>
+            <li class="nav-item">
+                <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#registerModal">REGISTER</button>
+            </li>
+        </ul>
+    </div>
     
     </div>
 </div>
