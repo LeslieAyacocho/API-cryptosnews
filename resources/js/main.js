@@ -7,7 +7,7 @@ $('.link').on('click', (e) => {
 
     switch (link) {
         case "crypto":
-            crypto('coins');
+            crypto();
             break;
 
         
