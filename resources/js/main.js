@@ -1,5 +1,5 @@
 import crypto from './crypto' 
-import auth from './modals/authM'
+// import auth from './modals/authM'
 import news from './news' 
 $(document).ready(function(){
 
@@ -13,7 +13,7 @@ $('.link').on('click', (e) => {
             break;
 
         case "news":
-            news('news');
+            news();
             break;
 
         default:

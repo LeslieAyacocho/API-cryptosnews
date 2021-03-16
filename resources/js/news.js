@@ -1,14 +1,17 @@
-export default function news(type) {  
+export default function news() {  
     console.log("This is working.");
 
     let tableContent=`
-    <thead class="">
-        <tbody id="cryptoNews">
-        </tbody>
-    </thead>
+    <div class="table-responsive" id="draggable" class="table-responsive ui-widget-content">
+        <table class="table" id="tableContent">
+        <thead class="">
+            <tbody id="cryptoNews">
+            </tbody>
+        </thead>
+    </table></div>
     `
 
-    $('#tableContent').html(tableContent);
+    $('#contentpage').html(tableContent);
     $.ajax({
             type: 'GET',
             url: 'https://min-api.cryptocompare.com/data/v2/news'+

@@ -19,7 +19,6 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
-<<<<<<< HEAD
     <div class="container-fluid">
         <a href="#" class="navbar-brand nav-link link" style="color: #80ffdb;" data-id="Movie">CoinStock</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +30,7 @@
             <a href="#" class="nav-link link" style="color: #80ffdb;" data-id="crypto">CryptoCurrency Ranking</a>
             </li>
             <li class="nav-item">
-            <a href="#" class="nav-link link" style="color: #80ffdb;"data-id="news">News</a>
+            <a href="#" class="nav-link link" style="color: #80ffdb;" data-id="news">News</a>
             </li>
         </ul>
 
