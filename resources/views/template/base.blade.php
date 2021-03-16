@@ -19,6 +19,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
+<<<<<<< HEAD
     <div class="container-fluid">
         <a href="#" class="navbar-brand nav-link link" style="color: #80ffdb;" data-id="Movie">CoinStock</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,10 +35,16 @@
             </li>
         </ul>
 
-        <!-- <ul class="form-inline my-2 my-lg-0">
-            <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button>
-            <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#registerModal">REGISTER</button>
-        </ul> -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button>
+            </li>
+            <li class="nav-item">
+                <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#registerModal">REGISTER</button>
+            </li>
+        </ul>
+    </div>
             
         </div>
     </div>

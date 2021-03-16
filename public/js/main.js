@@ -294,6 +294,35 @@ function showDetails() {
   return "\n    <div class=\"modal fade\" id=\"showDetails\" tabindex=\"-1\" aria-labelledby=\"showDetails\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\">\n        <div class=\"modal-content\">\n        \n            <div class=\"modal-header\">\n                \n            </div>\n            <div class=\"modal-body\">\n                    \n            <div class=\"row\">\n                <div class=\"col-sm-3 d-flex justify-content-center\">\n                <h2>24h</h2>    \n                </div>\n\n                <div class=\"col-sm-9\">\n                    <div class=\"row\" id=\"detail_other\">\n\n                    </div>\n                </div>\n            </div>\n                \n            \n                <div id=\"detail_chart\"> </div>\n\n            </div>\n            <div class=\"modal-footer\">\n            \n            <button type=\"submit\" class=\"btn\" style=\"background-color:#6930c3; color:#80ffdb;\" id=\"folowCoin\" ><i class=\"fas fa-plus-circle\"></i></button>\n            </div>\n    </div>\n</div>\n";
 }
 
+/***/ }),
+
+/***/ "./resources/js/news.js":
+/*!******************************!*\
+  !*** ./resources/js/news.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ news)
+/* harmony export */ });
+function news(type) {
+  console.log("This is working.");
+  var tableContent = "\n    <thead class=\"\">\n        <tbody id=\"cryptoNews\">\n        </tbody>\n    </thead>\n    ";
+  $('#tableContent').html(tableContent);
+  $.ajax({
+    type: 'GET',
+    url: 'https://min-api.cryptocompare.com/data/v2/news' + '/?api_key=d3fb5e4f2e639187374967645a9ffdd24789d3d1884df5965fc36d5688046429',
+    success: function success(response) {
+      var data = response.Data;
+      console.log(data);
+      data.forEach(function (element) {
+        $('#cryptoNews').append("\n                    <div class=\"col col-12 col-md-6 col-lg-4 mx-auto\"> \n                        <div class=\"card mx-auto\" style=\"width: 40rem;\">\n                            <div class=\"card-header\">\n                            <h5 class=\"card-title\"><a href=\"".concat(element.url, "\"><b>").concat(element.title, "</b></a></h5>\n                            </div>\n                            <img src=\"").concat(element.imageurl, "\" class=\"card-img-top\" alt=\"...\">\n                            <div class=\"card-body\">\n                                <p class=\"card-text\">#").concat(element.id, "</p>\n                                <p class=\"card-text\">tags:").concat(element.tags, "</p>\n                            </div>\n                            <div class=\"card-body\">\n                            </div>\n                        </div>\n                    </div>\n                "));
+      });
+    }
+  });
+}
+
 /***/ })
 
 /******/ 	});
@@ -359,6 +388,10 @@ var __webpack_exports__ = {};
   \******************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _crypto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./crypto */ "./resources/js/crypto.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './modals/authM'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _news__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./news */ "./resources/js/news.js");
+
+
 
 $(document).ready(function () {
   $('.link').on('click', function (e) {
@@ -368,6 +401,10 @@ $(document).ready(function () {
     switch (link) {
       case "crypto":
         (0,_crypto__WEBPACK_IMPORTED_MODULE_0__.default)();
+        break;
+
+      case "news":
+        (0,_news__WEBPACK_IMPORTED_MODULE_2__.default)('news');
         break;
 
       default:
