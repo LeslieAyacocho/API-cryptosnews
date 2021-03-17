@@ -13,16 +13,16 @@ class DatabaseTable extends Migration
      */
     public function up()
     {
-        Schema::create('cyptos', function (Blueprint $table) {
+        Schema::create('cryptos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('cryptoname');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Schema::create('alphas', function (Blueprint $table) {
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('alphaname');
+            $table->string('news');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

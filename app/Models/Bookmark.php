@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Alpha extends Model
+class Bookmark extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = [ 'alphaname', 'user_id'];
+    protected $fillable = [ 'news', 'user_id'];
 
     public function user()
     {
