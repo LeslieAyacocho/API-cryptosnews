@@ -2,6 +2,22 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./resources/js/AuthenticationModals.js":
+/*!**********************************************!*\
+  !*** ./resources/js/AuthenticationModals.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ authModal)
+/* harmony export */ });
+function authModal() {
+  return "\n    \n<!-------------------------------------- LOGIN-MODAL --------------------------- -->\n<div id=\"loginModal\" class=\"modal fade\">\n\t<div class=\"modal-dialog modal-login\">\n\t\t<div class=\"modal-content\">\n\t\t\t<div class=\"modal-header\">\t\t\t\t\n\t\t\t\t<h4 class=\"modal-title\">LOGIN</h4>\n\t\t\t\t<button type=\"button\" class=\"btn close\" data-bs-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t<form id=\"loginForm\">\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<i class=\"fa fa-user\"></i>\n\t\t\t\t\t\t<input type=\"email\" class=\"form-control\" id=\"lemail\" name=\"email\" placeholder=\"Email\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<i class=\"fa fa-lock\"></i>\n\t\t\t\t\t\t<input type=\"password\" class=\"form-control\" id=\"lpassword\" name=\"password\" autocomplete=\"on\" placeholder=\"Password\">\t\t\t\t\t\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<input type=\"submit\" class=\"btn btn-lg\" id=\"loginBtn\" value=\"Login\">\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>     \n    \n<!-------------------------------------- REGISTER-MODAL ----------------------------->\n<div id=\"registerModal\" class=\"modal fade\">\n\t<div class=\"modal-dialog modal-login\">\n\t\t<div class=\"modal-content\">\n\t\t\t<div class=\"modal-header\">\t\t\t\t\n\t\t\t\t<h4 class=\"modal-title\">REGISTER</h4>\n\t\t\t\t<button type=\"button\" class=\"btn close\" data-bs-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t<form id=\"registerForm\">\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<i class=\"fa fa-user\"></i>\n\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Name\" >\n                    </div>\n                    <div class=\"form-group\">\n\t\t\t\t\t\t<i class=\"fa fa-user\"></i>\n\t\t\t\t\t\t<input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" placeholder=\"Email\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<i class=\"fa fa-lock\"></i>\n\t\t\t\t\t\t<input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" autocomplete=\"on\" placeholder=\"Password\">\t\t\t\t\t\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<input type=\"submit\" class=\"btn btn-lg\" id=\"registerBtn\" value=\"Register\">\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t</div>\n</div>     \n\n\n\n    ";
+}
+
+/***/ }),
+
 /***/ "./resources/js/crypto.js":
 /*!********************************!*\
   !*** ./resources/js/crypto.js ***!
@@ -401,8 +417,10 @@ var __webpack_exports__ = {};
   \******************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _crypto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./crypto */ "./resources/js/crypto.js");
-/* harmony import */ var _news__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./news */ "./resources/js/news.js");
+/* harmony import */ var _AuthenticationModals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AuthenticationModals */ "./resources/js/AuthenticationModals.js");
+/* harmony import */ var _news__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./news */ "./resources/js/news.js");
  // import auth from './modals/authM'
+
 
 
 $(document).ready(function () {
@@ -416,13 +434,87 @@ $(document).ready(function () {
         break;
 
       case "news":
-        (0,_news__WEBPACK_IMPORTED_MODULE_1__.default)();
+        (0,_news__WEBPACK_IMPORTED_MODULE_2__.default)();
         break;
 
       default:
         break;
     }
   });
+  $('#contentpage').append(_AuthenticationModals__WEBPACK_IMPORTED_MODULE_1__.default); // REGISTRATION
+  // $('#registerForm').validate({
+  // rules: {
+  //     name: {required:true},
+  //     email: {  required:true, email:true },
+  //     password: { required:true },
+  // },
+  // messages: {
+  //     name: {required:'required',},
+  //     email: { required:'required'},
+  //     password: { required:'required'},
+  // },
+  //     errorPlacement: function(error, element){
+  //         error.insertAfter(element)
+  // },
+  // submitHandler: function(form,e) {
+
+  $('#registerBtn').on('click', function (e) {
+    var data = $('#registerForm').serialize(); // e.preventDefault();
+
+    $.ajax({
+      type: "post",
+      url: "/api/auth/register",
+      data: data,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: "json",
+      success: function success(data) {
+        console.log(data);
+        $('#registerModal').each(function () {
+          $(this).modal('hide');
+        });
+      },
+      error: function error(_error) {
+        console.log('error');
+      }
+    });
+  }); //LOGIN
+  // $('#loginForm').validate({
+  //     rules: {
+  //     lemail: {  required:true, email:true },
+  //     lpassword: { required:true },
+  //     },
+  //     messages: {
+  //         lemail: { required:'required', email:'Enter Valid Email'},
+  //         lpassword: { required:'required'},
+  //     },
+  //         errorPlacement: function(error, element){
+  //             error.insertAfter(element)
+  //     },
+  //     submitHandler: function(form,e) {
+
+  $('#registerBtn').on('click', function (e) {
+    var data = $('#loginForm').serialize();
+    $.ajax({
+      type: "post",
+      url: "/api/auth/login",
+      data: data,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: "json",
+      success: function success(data) {
+        console.log(data);
+        window.localStorage.setItem('access_token', data.access_token);
+      },
+      error: function error(_error2) {
+        console.log(_error2);
+        alert('Failed to login. Please Try again');
+      }
+    });
+  }); //     }
+  // });
 });
 })();
 
