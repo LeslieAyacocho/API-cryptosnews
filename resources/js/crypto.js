@@ -86,7 +86,10 @@ export default function crypto(type) {
                     });
 
                     
-                    
+                    $(".uuid").on("click", function(e) {
+                        var id = $(e.relatedTarget).attr('data-id');
+                        console.log('AAAAAAAAAA');
+                    });
 
 
 

@@ -6,12 +6,8 @@ body {
     
 }
 
-.main-container { 
-    display: flex; justify-content: center; text-align: justify; 
-}
-
-.title { 
-    font-weight: 800; font-size: 30px; padding-bottom: 20px;
+#contentpage{
+    align-content: center;
 }
 
 
@@ -135,4 +131,51 @@ nav {
 }
 .addCurrency i{
     font-size: 20px;
+}
+
+.card-img-top {
+    object-fit: cover;
+    width:400px;
+    height:200px;
+} 
+
+.card-title a{
+    color:#80ffdb;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+
+}
+
+.card-text {
+    color: #70d4d4 ;
+}
+
+.card {
+    background-color: #393e46;
+    float: left;
+    width:400px;
+    height:500px;
+    margin:10px;
+} 
+
+#news-tag{
+    color: #252525;
+}
+
+#bookmark{
+    float: right;
+    font-size: 30px;
+}
+
+.btn{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+}
+
+i{
+    color: #f5f5f5;
+}
+span i:hover{
+    color:#fd5e53 ;
 }

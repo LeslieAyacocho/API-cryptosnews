@@ -49,6 +49,10 @@ function crypto(type) {
         r++;
         (0,_drawAllGraph__WEBPACK_IMPORTED_MODULE_1__.default)(all_coin_history, all_coin_change);
       });
+      $(".uuid").on("click", function (e) {
+        var id = $(e.relatedTarget).attr('data-id');
+        console.log('AAAAAAAAAA');
+      });
       $('#showDetails').on('show.bs.modal', function (e) {
         var each_coin_history = new Array();
         var id = $(e.relatedTarget).attr('data-id');
@@ -292,19 +296,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function news() {
   console.log("This is working.");
-  var tableContent = "\n    <div class=\"table-responsive\" id=\"draggable\" class=\"table-responsive ui-widget-content\">\n        <table class=\"table\" id=\"tableContent\">\n        <thead class=\"\">\n            <tbody id=\"cryptoNews\">\n            </tbody>\n        </thead>\n    </table></div>\n    ";
-  $('#contentpage').html(tableContent);
+  var newsContent = "\n    <div class=\"\" id=\"card-append\">\n        \n    </div>\n    ";
+  $('#contentpage').html(newsContent);
   $.ajax({
     type: 'GET',
     url: 'https://min-api.cryptocompare.com/data/v2/news' + '/?api_key=d3fb5e4f2e639187374967645a9ffdd24789d3d1884df5965fc36d5688046429',
     success: function success(response) {
       var data = response.Data;
-      console.log(data);
       data.forEach(function (element) {
-        $('#cryptoNews').append("\n                    <div class=\"col col-12 col-md-6 col-lg-4 mx-auto\"> \n                        <div class=\"card mx-auto\" style=\"width: 40rem;\">\n                            <div class=\"card-header\">\n                            <h5 class=\"card-title\"><a href=\"".concat(element.url, "\"><b>").concat(element.title, "</b></a></h5>\n                            </div>\n                            <img src=\"").concat(element.imageurl, "\" class=\"card-img-top\" alt=\"...\">\n                            <div class=\"card-body\">\n                                <p class=\"card-text\">#").concat(element.id, "</p>\n                                <p class=\"card-text\">tags:").concat(element.tags, "</p>\n                            </div>\n                            <div class=\"card-body\">\n                            </div>\n                        </div>\n                    </div>\n                "));
+        var string = element.body;
+        var length = 150;
+        var bodytrimmed = string.substring(0, length);
+        $('#card-append').append("\n                <div class=\"card col\"  style=\"\">\n                    <img src=\"".concat(element.imageurl, "\" class=\"card-img-top\" alt=\"...\"> \n                    <div class=\"card-body\">\n                        <h5 class=\"card-title\"><a href=\"#\" target=\"_blank\">").concat(element.title, "</a></h5>\n                        <p class=\"card-text\">").concat(bodytrimmed, "</p>\n                        <input type=\"hidden\" id=\"tags\" name=\"tags\" id=\"").concat(element.tags, "\">\n                    </div>\n                    <div class=\"card-footer\">\n                    <a href=\"").concat(element.url, "\" target=\"_blank\"><button type=\"button\" class=\"btn\" style=\"background-color:#6930c3; color:#80ffdb\">READ MORE</button></a>\n                    <span id=\"bookmark\"><i class=\"fas fa-bookmark bookmarknews\" id=\"bookmarknews\" data-id=\"").concat(element.id, "\" tabindex=\"0\"></i></span>\n                    </div>\n                </div>\n                "));
+      });
+      $('.bookmarknews').on('click', function (e) {
+        var id = $(e.currentTarget).attr('data-id');
+        console.log(id);
       });
     }
   });
+}
+{
+  /* <p class="card-text">#${element.id}</p> */
 }
 
 /***/ }),
