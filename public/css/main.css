@@ -179,3 +179,92 @@ i{
 span i:hover{
     color:#fd5e53 ;
 }
+
+#myaccNav ul{
+    margin-top: 40px;
+    /* border: 1px solid #6930c3; */
+}
+#myaccNav li{
+  border: 2px solid #6930c3;
+}
+
+#myaccNav li:hover{
+    border: 2px solid #80ffdb;
+    background-color: #6930c3;
+  }
+
+#myaccNav a{
+    font-family: 'Cabin', sans-serif;;
+    font-weight: 800;
+    color: #80ffdb;
+    font-size: 18px;
+}
+
+.modal-login {
+    width: 450px;
+}
+.modal-login .modal-content {
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+}
+.modal-login .modal-header {
+    border-bottom: none;
+    position: relative;
+    justify-content: center;
+}
+.modal-title {
+    text-align: center;
+    font-size: 26px;
+    color: #80ffdb !important;
+}
+.modal-login  .form-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+.modal-login i {
+    position: absolute;
+    left: 13px;
+    top: 11px;
+    font-size: 18px;
+    color: #6930c3;
+}
+.modal-login .form-control {
+    padding-left: 40px;
+}
+.modal-login .form-control:focus {
+    border-color: #00ce81;
+}
+.modal-login .form-control, .modal-login .btn {
+    min-height: 40px;
+    border-radius: 3px; 
+}
+.modal-login .hint-text {
+    text-align: center;
+    padding-top: 10px;
+}
+.modal-login .close {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+.modal-login .btn, .modal-login .btn:active {	
+    border: none;
+    background: #6930c3 !important;
+    line-height: normal;
+    color:#80ffdb ;
+}
+.modal-login .btn:hover, .modal-login .btn:focus {
+    background: #80ffdb !important;
+    color:#6930c3 ;
+}
+
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+
+.modal-login .modal-content{
+    background: #252525;
+    border-color: #6930c3;
+}

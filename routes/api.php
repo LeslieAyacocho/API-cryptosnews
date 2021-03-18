@@ -26,6 +26,8 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::resource('Crypto', CryptoController::class);
+Route::get('/crypto/{id}', [CryptoController::class, 'getUsers']);
+Route::get('/bookmarks/{id}', [BookmarkController::class, 'getUsers']);
 Route::resource('Bookmark', BookmarkController::class);
 
 Route::middleware(['auth:sanctum'])->group(function(){

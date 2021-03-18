@@ -14,7 +14,17 @@ class CryptoController extends Controller
      */
     public function index()
     {
-        //
+        $crypto = Crypto::orderBy('id')->get();
+        return response()->json($crypto);
+    }
+
+
+    public function getUsers($id)
+    {
+        $crypto = Crypto::orderBy('id')
+        ->where('user_id', '=', $id)
+        ->get();
+        return response()->json($crypto);
     }
 
     /**

@@ -16,6 +16,14 @@ class BookmarkController extends Controller
     {
         //
     }
+    
+    public function getUsers($id)
+    {
+        $bookmark = Bookmark::orderBy('id')
+        ->where('user_id', '=', $id)
+        ->get();
+        return response()->json($bookmark);
+    }
 
     /**
      * Show the form for creating a new resource.

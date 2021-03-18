@@ -18,6 +18,55 @@ function authModal() {
 
 /***/ }),
 
+/***/ "./resources/js/bookmark.js":
+/*!**********************************!*\
+  !*** ./resources/js/bookmark.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ bookmark)
+/* harmony export */ });
+function bookmark(response) {
+  var newsContent = "\n    <div id=\"card-append\">\n        \n    </div>\n    ";
+  $('#content-account').html(newsContent);
+  var i = 0;
+  var all_news_id = new Array();
+  response.forEach(function (data) {
+    all_news_id[i] = data.news;
+    i++;
+  }); // console.log(all_news_id);
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://min-api.cryptocompare.com/data/v2/news' + '/?api_key=d3fb5e4f2e639187374967645a9ffdd24789d3d1884df5965fc36d5688046429',
+    success: function success(response) {
+      var news = response.Data; // console.log(getnews);
+
+      console.log(all_news_id);
+
+      var _loop = function _loop(r) {
+        news.forEach(function (element) {
+          if (all_news_id[r] == element.id) {
+            // console.log('AAAAAAAAAA');
+            var string = element.body;
+            var length = 150;
+            var bodytrimmed = string.substring(0, length);
+            $('#card-append').append("\n                            <div class=\"card col\"  style=\"\">\n                                <img src=\"".concat(element.imageurl, "\" class=\"card-img-top\" alt=\"...\"> \n                                <div class=\"card-body\">\n                                    <h5 class=\"card-title\"><a href=\"#\" target=\"_blank\">").concat(element.title, "</a></h5>\n                                    <p class=\"card-text\">").concat(bodytrimmed, "</p>\n                                    <input type=\"hidden\" id=\"tags\" name=\"tags\" id=\"").concat(element.tags, "\">\n                                </div>\n                                <div class=\"card-footer\">\n                                <a href=\"").concat(element.url, "\" target=\"_blank\"><button type=\"button\" class=\"btn\" style=\"background-color:#6930c3; color:#80ffdb\">READ MORE</button></a>\n                                <span id=\"bookmark\"><i class=\"fas fa-trash-alt del-bookmarknews\" id=\"bookmarknews\" data-id=\"").concat(element.id, "\" tabindex=\"0\"></i></span>\n                                </div>\n                            </div>\n                            "));
+          }
+        });
+      };
+
+      for (var r = -1; r < all_news_id.length; r++) {
+        _loop(r);
+      }
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/crypto.js":
 /*!********************************!*\
   !*** ./resources/js/crypto.js ***!
@@ -130,6 +179,64 @@ function crypto(type) {
       // });
     }
   });
+}
+
+/***/ }),
+
+/***/ "./resources/js/currency.js":
+/*!**********************************!*\
+  !*** ./resources/js/currency.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ currency)
+/* harmony export */ });
+/* harmony import */ var _getHistory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getHistory */ "./resources/js/getHistory.js");
+/* harmony import */ var _drawAllGraph__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./drawAllGraph */ "./resources/js/drawAllGraph.js");
+
+
+function currency(response) {
+  // console.log(response);
+  var tableContent = "\n        <div class=\"table-responsive\" id=\"draggable\" class=\"table-responsive ui-widget-content\">\n        <table class=\"table\" id=\"tableContent\">\n        <thead class=\"\">\n        <tr>\n        \n        \n        <th>  </th>\n        <th>CRYPTOCURRENCY</th>\n        <th>PRICE</th>\n        <th>MARKET CAP</th>\n        <th>24H</th>\n        <th></th>\n        \n        </tr>\n        </thead>\n        <tbody id=\"cryptoCoin\">\n        </tbody>\n        </table></div>\n        ";
+  $('#content-account').html(tableContent);
+  var currency = new Intl.NumberFormat();
+  var all_coin_history = new Array();
+  var all_coin_change = new Array();
+  var r = 0;
+  var i = 0;
+  var x = -1;
+  response.forEach(function (element) {
+    $.ajax({
+      method: 'GET',
+      url: 'https://api.coinranking.com/v1/public/coin/' + element.cryptoid + "?base=PHP",
+      success: function success(response) {
+        // console.log(response.data.coin);
+        var coins = response.data;
+        console.log(coins);
+        var coin_history = (0,_getHistory__WEBPACK_IMPORTED_MODULE_0__.default)(element.id);
+        all_coin_history[i] = coin_history;
+        i++; // coins.forEach(element => {
+
+        $('#cryptoCoin').append("\n                    <tr class=\"uuidacc\" data-id=\"".concat(coins.coin.id, "\" data-bs-toggle=\"modal\">\n                    <td> ").concat(coins.coin.rank, "</td>\n                    <td>\n                        <div \n                        class=\"profilename_wrapper\" >\n                    <div class=\"profile_logo\">\n                        <img class=\"img\" src=\"").concat(coins.coin.iconUrl, "\">\n                    </div>\n                            <span class=\"profile_name\"> \n                            <a class=\"currencylink\" href=\"#\"> ").concat(coins.coin.name, "</a>\n                            <p class=\"profile_symbol\"> ").concat(coins.coin.symbol, "</p>\n                            </span>\n                        </div>\n                    </td>\n                    <td>").concat(coins.base.sign, " ").concat(currency.format(coins.coin.price), "</td>\n                    <td>").concat(coins.base.sign, " ").concat(currency.format(coins.coin.marketCap), "</td>\n                    <td id=\"chart_div").concat(r, "\"></td>\n                    <td> <span id=\"bookmark\"><i class=\"fas fa-trash-alt del-bookmarknews\" id=\"bookmarknews\" data-id=\"").concat(element.id, "\" tabindex=\"0\"></i></span></td>\n                    </tr>\n                    "));
+        x++;
+        all_coin_change[x] = coins.coin.change;
+        r++;
+        (0,_drawAllGraph__WEBPACK_IMPORTED_MODULE_1__.default)(all_coin_history, all_coin_change); // });
+      }
+    });
+  }); // response.forEach(element => {
+  //     $('#cryptoCoin').append(`
+  //     <tr>
+  //     <td>${element.id}</td>
+  //     <td>${element.cryptoid}</td>
+  //     <td>${element.user_id}</td>
+  //     <td align='center'><i class="fas fa-edit" data-bs-toggle="modal" data-bs-target="#editActor" data-id="${element.id}" id="editActorIcon"></i></td>
+  //     <td align='center'><i class="fas fa-trash-alt actorDelete" data-id="${element.id}"></i></td>
+  //     </tr>
+  //     `)
+  // });
 }
 
 /***/ }),
@@ -333,9 +440,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ myAccount)
 /* harmony export */ });
+/* harmony import */ var _bookmark__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bookmark */ "./resources/js/bookmark.js");
+/* harmony import */ var _currency__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./currency */ "./resources/js/currency.js");
+
+
 function myAccount() {
-  var pageContent = "\n    <ul class=\"nav justify-content-center\">\n<li class=\"nav-item\">\n<a class=\"nav-link\" aria-current=\"page\" href=\"#\">Active</a>\n</li>\n<li class=\"nav-item\">\n<a class=\"nav-link\" href=\"#\">Link</a>\n</li>\n\n</ul>\n    ";
+  var pageContent = "\n    <div id= myaccNav>\n        <ul class=\"nav justify-content-center myaccNav\">\n        <li class=\"nav-item\">\n        <a class=\"nav-link acclink\" data-id=\"crypto\" href=\"#\">Cryptocurrency</a>\n        </li>\n        \n        <li class=\"nav-item\">\n        <a class=\"nav-link acclink\" data-id=\"bookmarks\" href=\"#\">Bookmarks</a>\n        </li>\n        </ul>\n    </div>\n    \n\n    \n    <div id=\"content-account\">\n    </div>\n    ";
   $('#contentpage').html(pageContent);
+  $('.acclink').on('click', function (e) {
+    var id = 1;
+    var link = e.currentTarget.dataset.id; // console.log(link);
+
+    $.ajax({
+      type: "GET",
+      url: "/api/" + link + "/" + id,
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      },
+      dataType: 'json',
+      success: function success(response) {
+        switch (link) {
+          case "crypto":
+            (0,_currency__WEBPACK_IMPORTED_MODULE_1__.default)(response);
+            break;
+
+          case "bookmarks":
+            (0,_bookmark__WEBPACK_IMPORTED_MODULE_0__.default)(response);
+            break;
+
+          default:
+            break;
+        }
+      },
+      error: function error(_error) {
+        console.log('error');
+      }
+    });
+  });
 }
 
 /***/ }),
