@@ -38,8 +38,38 @@ export default function news() {
             
             $('.bookmarknews').on('click', (e) => {
                 
-                var id = $(e.currentTarget).attr('data-id');
-                console.log(id);
+                var newsid = $(e.currentTarget).attr('data-id');
+                console.log(newsid);
+                var userid = 1;
+
+                    let datainput= `
+                    <form action="" id="addBookmark">
+                    <input type="text" id="news" name="news" value="${newsid}">
+                    <input type="text" id="user_id" name="user_id" value="${userid}">
+                    </form>
+                    `;
+
+                    var data = $(datainput).serialize();
+                    console.log(data);
+
+                    $.ajax({
+                        
+                        type: "post",
+                        url: "/api/Bookmark",
+                        data: data,
+                        headers: {
+                            // 'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            e.preventDefault();
+                            console.log(data);
+                
+                        },
+                        error: function(error) {
+                            console.log('error');
+                        }
+                    });
 
             });
 		}

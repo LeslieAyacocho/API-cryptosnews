@@ -33,9 +33,9 @@ class CryptoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $crypto = Crypto::create($request->all());
+        return response()->json($crypto);
     }
 
     /**

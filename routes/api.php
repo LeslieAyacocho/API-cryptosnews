@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CryptoController;
+use App\Http\Controllers\BookmarkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +25,11 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 
 Route::post('/auth/login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/me', function(Request $request) {
-        return auth()->user();
-    });
+Route::resource('Crypto', CryptoController::class);
+Route::resource('Bookmark', BookmarkController::class);
 
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
+Route::middleware(['auth:sanctum'])->group(function(){
+    Route::post('logout', [AuthController::class, 'logout']);
+    // Route::post('details', [AuthController::class, 'user_info']);
+
 });

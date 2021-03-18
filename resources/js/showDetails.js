@@ -29,7 +29,7 @@ export default function showDetails(){
             </div>
             <div class="modal-footer">
             
-            <button type="submit" class="btn" style="background-color:#6930c3; color:#80ffdb;" id="folowCoin" ><i class="fas fa-plus-circle"></i></button>
+            
             </div>
     </div>
 </div>

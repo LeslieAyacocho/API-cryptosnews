@@ -33,7 +33,7 @@ export default function crypto(type) {
             $.ajax({
                 method: 'GET',
                 url:
-                    'https://api.coinranking.com/v1/public/coins?base=PHP',
+                    'https://api.coinranking.com/v1/public/coins?base=PHP&limit=5',
             
                 // headers: {'x-access-token' : 'coinranking4a54ef6bb07419e96c653461240ac9f9ebe2c2d4db26a7d6'} ,
 
@@ -85,18 +85,10 @@ export default function crypto(type) {
                         drawAllGraph(all_coin_history,all_coin_change);
                     });
 
-                    
-                    $(".uuid").on("click", function(e) {
-                        var id = $(e.relatedTarget).attr('data-id');
-                        console.log('AAAAAAAAAA');
-                    });
-
-
-
                     $('#showDetails').on('show.bs.modal', function(e) {
                         var each_coin_history = new Array();
                         var id = $(e.relatedTarget).attr('data-id');
-                        console.log(id);
+                        
                         $.ajax({
                             method: 'GET',
                         url:
@@ -106,9 +98,9 @@ export default function crypto(type) {
                             var historydata = response.data;
                             var i = -1;
                         historydata.history.forEach(element => {
-                        i++
-                        each_coin_history[i]=[element.timestamp,parseFloat(element.price)];
-                        });
+                            i++
+                            each_coin_history[i]=[element.timestamp,parseFloat(element.price)];
+                            });
                         drawGraph(each_coin_history);
                         }
                         });
@@ -120,8 +112,6 @@ export default function crypto(type) {
                         success: function (response) {
                             let data = response.data
                             var change;
-
-                            // console.log(data.coin.change);
 
                             if(data.coin.change>0){
                                 change = '+' + data.coin.change;
@@ -148,12 +138,59 @@ export default function crypto(type) {
                             
                             `);
                             $('#detail_other').html(details);
-                            
                         }
                         
                         });
+
+                        $('.modal-footer').html(`
+                        <button type="submit" class="btn followCoin" style="background-color:#6930c3; color:#80ffdb;" data-id="${id}"><i class="fas fa-plus-circle"></i></button>
+                        `);
+
+                        $('.followCoin').on('click', (e) => {
+                            var id = $(e.currentTarget).attr('data-id');
+                            // console.log(id);
+
+                            var cryptoid = $(e.currentTarget).attr('data-id');
+                            console.log(cryptoid);
+                            var userid = 1;
+
+                            let datainput= `
+                            <form action="" id="followCrypto">
+                            <input type="text" id="cryptoid" name="cryptoid" value="${cryptoid}">
+                            <input type="text" id="user_id" name="user_id" value="${userid}">
+                            </form>
+                            `;
+
+                            var data = $(datainput).serialize();
+                            console.log(data);
+
+                            $.ajax({
+                                
+                                type: "post",
+                                url: "/api/Crypto",
+                                data: data,
+                                headers: {
+                                    // 'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                                },
+                                dataType: "json",
+                                success: function(data) {
+                                    e.preventDefault();
+                                    console.log(data);
+                        
+                                },
+                                error: function(error) {
+                                    console.log('error');
+                                }
+                            });
+                        });
                     });
+
+                    
         
+                    // $(".followCoin").on("click", function(e) {
+                                        
+                    //     
+                    // });
                 }
             });
         

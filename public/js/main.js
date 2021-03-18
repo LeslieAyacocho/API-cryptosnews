@@ -43,7 +43,7 @@ function crypto(type) {
   $('#contentpage').append(_showDetails__WEBPACK_IMPORTED_MODULE_2__.default);
   $.ajax({
     method: 'GET',
-    url: 'https://api.coinranking.com/v1/public/coins?base=PHP',
+    url: 'https://api.coinranking.com/v1/public/coins?base=PHP&limit=5',
     // headers: {'x-access-token' : 'coinranking4a54ef6bb07419e96c653461240ac9f9ebe2c2d4db26a7d6'} ,
     success: function success(response) {
       var data = response.data;
@@ -65,14 +65,9 @@ function crypto(type) {
         r++;
         (0,_drawAllGraph__WEBPACK_IMPORTED_MODULE_1__.default)(all_coin_history, all_coin_change);
       });
-      $(".uuid").on("click", function (e) {
-        var id = $(e.relatedTarget).attr('data-id');
-        console.log('AAAAAAAAAA');
-      });
       $('#showDetails').on('show.bs.modal', function (e) {
         var each_coin_history = new Array();
         var id = $(e.relatedTarget).attr('data-id');
-        console.log(id);
         $.ajax({
           method: 'GET',
           url: 'https://api.coinranking.com/v1/public/coin/' + id + '/history/24h?base=PHP',
@@ -91,7 +86,7 @@ function crypto(type) {
           url: 'https://api.coinranking.com/v1/public/coin/' + id + '?base=PHP',
           success: function success(response) {
             var data = response.data;
-            var change; // console.log(data.coin.change);
+            var change;
 
             if (data.coin.change > 0) {
               change = '+' + data.coin.change;
@@ -104,7 +99,35 @@ function crypto(type) {
             $('#detail_other').html(details);
           }
         });
-      });
+        $('.modal-footer').html("\n                        <button type=\"submit\" class=\"btn followCoin\" style=\"background-color:#6930c3; color:#80ffdb;\" data-id=\"".concat(id, "\"><i class=\"fas fa-plus-circle\"></i></button>\n                        "));
+        $('.followCoin').on('click', function (e) {
+          var id = $(e.currentTarget).attr('data-id'); // console.log(id);
+
+          var cryptoid = $(e.currentTarget).attr('data-id');
+          console.log(cryptoid);
+          var userid = 1;
+          var datainput = "\n                            <form action=\"\" id=\"followCrypto\">\n                            <input type=\"text\" id=\"cryptoid\" name=\"cryptoid\" value=\"".concat(cryptoid, "\">\n                            <input type=\"text\" id=\"user_id\" name=\"user_id\" value=\"").concat(userid, "\">\n                            </form>\n                            ");
+          var data = $(datainput).serialize();
+          console.log(data);
+          $.ajax({
+            type: "post",
+            url: "/api/Crypto",
+            data: data,
+            headers: {// 'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+            },
+            dataType: "json",
+            success: function success(data) {
+              e.preventDefault();
+              console.log(data);
+            },
+            error: function error(_error) {
+              console.log('error');
+            }
+          });
+        });
+      }); // $(".followCoin").on("click", function(e) {
+      //     
+      // });
     }
   });
 }
@@ -300,6 +323,23 @@ function getHistory(coin_ID) {
 
 /***/ }),
 
+/***/ "./resources/js/myAccount.js":
+/*!***********************************!*\
+  !*** ./resources/js/myAccount.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ myAccount)
+/* harmony export */ });
+function myAccount() {
+  var pageContent = "\n    <ul class=\"nav justify-content-center\">\n<li class=\"nav-item\">\n<a class=\"nav-link\" aria-current=\"page\" href=\"#\">Active</a>\n</li>\n<li class=\"nav-item\">\n<a class=\"nav-link\" href=\"#\">Link</a>\n</li>\n\n</ul>\n    ";
+  $('#contentpage').html(pageContent);
+}
+
+/***/ }),
+
 /***/ "./resources/js/news.js":
 /*!******************************!*\
   !*** ./resources/js/news.js ***!
@@ -326,8 +366,27 @@ function news() {
         $('#card-append').append("\n                <div class=\"card col\"  style=\"\">\n                    <img src=\"".concat(element.imageurl, "\" class=\"card-img-top\" alt=\"...\"> \n                    <div class=\"card-body\">\n                        <h5 class=\"card-title\"><a href=\"#\" target=\"_blank\">").concat(element.title, "</a></h5>\n                        <p class=\"card-text\">").concat(bodytrimmed, "</p>\n                        <input type=\"hidden\" id=\"tags\" name=\"tags\" id=\"").concat(element.tags, "\">\n                    </div>\n                    <div class=\"card-footer\">\n                    <a href=\"").concat(element.url, "\" target=\"_blank\"><button type=\"button\" class=\"btn\" style=\"background-color:#6930c3; color:#80ffdb\">READ MORE</button></a>\n                    <span id=\"bookmark\"><i class=\"fas fa-bookmark bookmarknews\" id=\"bookmarknews\" data-id=\"").concat(element.id, "\" tabindex=\"0\"></i></span>\n                    </div>\n                </div>\n                "));
       });
       $('.bookmarknews').on('click', function (e) {
-        var id = $(e.currentTarget).attr('data-id');
-        console.log(id);
+        var newsid = $(e.currentTarget).attr('data-id');
+        console.log(newsid);
+        var userid = 1;
+        var datainput = "\n                    <form action=\"\" id=\"addBookmark\">\n                    <input type=\"text\" id=\"news\" name=\"news\" value=\"".concat(newsid, "\">\n                    <input type=\"text\" id=\"user_id\" name=\"user_id\" value=\"").concat(userid, "\">\n                    </form>\n                    ");
+        var data = $(datainput).serialize();
+        console.log(data);
+        $.ajax({
+          type: "post",
+          url: "/api/Bookmark",
+          data: data,
+          headers: {// 'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+          },
+          dataType: "json",
+          success: function success(data) {
+            e.preventDefault();
+            console.log(data);
+          },
+          error: function error(_error) {
+            console.log('error');
+          }
+        });
       });
     }
   });
@@ -349,7 +408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ showDetails)
 /* harmony export */ });
 function showDetails() {
-  return "\n    <div class=\"modal fade\" id=\"showDetails\" tabindex=\"-1\" aria-labelledby=\"showDetails\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\">\n        <div class=\"modal-content\">\n        \n            <div class=\"modal-header\">\n                \n            </div>\n            <div class=\"modal-body\">\n                    \n            <div class=\"row\">\n                <div class=\"col-sm-3 d-flex justify-content-center\">\n                <h2>24h</h2>    \n                </div>\n\n                <div class=\"col-sm-9\">\n                    <div class=\"row\" id=\"detail_other\">\n\n                    </div>\n                </div>\n            </div>\n                \n            \n                <div id=\"detail_chart\"> </div>\n\n            </div>\n            <div class=\"modal-footer\">\n            \n            <button type=\"submit\" class=\"btn\" style=\"background-color:#6930c3; color:#80ffdb;\" id=\"folowCoin\" ><i class=\"fas fa-plus-circle\"></i></button>\n            </div>\n    </div>\n</div>\n";
+  return "\n    <div class=\"modal fade\" id=\"showDetails\" tabindex=\"-1\" aria-labelledby=\"showDetails\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\">\n        <div class=\"modal-content\">\n        \n            <div class=\"modal-header\">\n                \n            </div>\n            <div class=\"modal-body\">\n                    \n            <div class=\"row\">\n                <div class=\"col-sm-3 d-flex justify-content-center\">\n                <h2>24h</h2>    \n                </div>\n\n                <div class=\"col-sm-9\">\n                    <div class=\"row\" id=\"detail_other\">\n\n                    </div>\n                </div>\n            </div>\n                \n            \n                <div id=\"detail_chart\"> </div>\n\n            </div>\n            <div class=\"modal-footer\">\n            \n            \n            </div>\n    </div>\n</div>\n";
 }
 
 /***/ })
@@ -419,7 +478,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _crypto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./crypto */ "./resources/js/crypto.js");
 /* harmony import */ var _AuthenticationModals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AuthenticationModals */ "./resources/js/AuthenticationModals.js");
 /* harmony import */ var _news__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./news */ "./resources/js/news.js");
- // import auth from './modals/authM'
+/* harmony import */ var _myAccount__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./myAccount */ "./resources/js/myAccount.js");
+
 
 
 
@@ -435,6 +495,10 @@ $(document).ready(function () {
 
       case "news":
         (0,_news__WEBPACK_IMPORTED_MODULE_2__.default)();
+        break;
+
+      case "myacc":
+        (0,_myAccount__WEBPACK_IMPORTED_MODULE_3__.default)();
         break;
 
       default:
@@ -494,8 +558,9 @@ $(document).ready(function () {
   //     },
   //     submitHandler: function(form,e) {
 
-  $('#registerBtn').on('click', function (e) {
+  $('#loginBtn').on('click', function (e) {
     var data = $('#loginForm').serialize();
+    e.preventDefault();
     $.ajax({
       type: "post",
       url: "/api/auth/login",
@@ -507,6 +572,31 @@ $(document).ready(function () {
       success: function success(data) {
         console.log(data);
         window.localStorage.setItem('access_token', data.access_token);
+        var x = document.getElementById("login-btn-nav");
+
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+
+        var y = document.getElementById("register-btn-nav");
+
+        if (y.style.display === "none") {
+          y.style.display = "block";
+        } else {
+          y.style.display = "none";
+        }
+
+        var z = document.getElementById("myaccount-nav");
+
+        if (z.style.display === "none") {
+          z.style.display = "block";
+        } else {
+          z.style.display = "none";
+        }
+
+        $('#loginModal').modal('hide');
       },
       error: function error(_error2) {
         console.log(_error2);

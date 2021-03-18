@@ -15,14 +15,14 @@ class DatabaseTable extends Migration
     {
         Schema::create('cryptos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('cryptoname');
+            $table->integer('cryptoid');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('bookmarks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('news');
+            $table->integer('news');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -36,7 +36,7 @@ class DatabaseTable extends Migration
     public function down()
     {
         Schema::dropIfExists('cryptos');
-        Schema::dropIfExists('alphas');
+        Schema::dropIfExists('bookmarks');
         
     }
 }

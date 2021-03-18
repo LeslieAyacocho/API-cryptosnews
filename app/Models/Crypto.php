@@ -10,7 +10,7 @@ class Crypto extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['cryptoname' , 'user_id' ,];
+    protected $fillable = ['cryptoid' , 'user_id' ,];
 
     public function user()
     {

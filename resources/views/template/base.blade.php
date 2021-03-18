@@ -37,15 +37,19 @@
             <li class="nav-item">
             <a href="#" class="nav-link link" style="color: #80ffdb;" data-id="news">News</a>
             </li>
+            
         </ul>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button>
+                <a href="#" class="nav-link link" id="myaccount-nav" style="color: #80ffdb; display: none;" data-id="myacc">My Account</a>
             </li>
             <li class="nav-item">
-                <button type="submit" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#registerModal">REGISTER</button>
+                <button type="submit" id="login-btn-nav" style="color: #80ffdb;" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button>
+            </li>
+            <li class="nav-item">
+                <button type="submit" id="register-btn-nav" style="color: #80ffdb;" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#registerModal">REGISTER</button>
             </li>
         </ul>
     </div>
