@@ -23,7 +23,6 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         try {
-            
             $credentials = request(['email', 'password']);
             
             if (!Auth::attempt($credentials)) {
@@ -52,5 +51,10 @@ class AuthController extends Controller
                 'error' => $error,
             ]);
         }
+    }
+
+    public function logout(Request $request){
+        $request->user()->currentAccessToken()->delete();
+
     }
 }

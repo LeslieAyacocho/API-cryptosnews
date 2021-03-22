@@ -625,6 +625,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 $(document).ready(function () {
+  var x = document.getElementById("login-btn-nav");
+  var y = document.getElementById("register-btn-nav");
+  var z = document.getElementById("myaccount-nav");
+  var a = document.getElementById("logout-nav");
+
+  if (localStorage.getItem('access_token')) {
+    x.style.display = "none";
+    y.style.display = "none";
+    z.style.display = "block";
+    a.style.display = "block";
+  } else {
+    x.style.display = "block";
+    y.style.display = "block";
+    z.style.display = "none";
+    a.style.display = "none";
+  }
+
   $('.link').on('click', function (e) {
     var link = e.currentTarget.dataset.id;
     console.log(link);
@@ -640,6 +657,11 @@ $(document).ready(function () {
 
       case "myacc":
         (0,_myAccount__WEBPACK_IMPORTED_MODULE_3__.default)();
+        break;
+
+      case "logout":
+        localStorage.removeItem("access_token");
+        location.reload();
         break;
 
       default:
@@ -664,8 +686,8 @@ $(document).ready(function () {
   // submitHandler: function(form,e) {
 
   $('#registerBtn').on('click', function (e) {
-    var data = $('#registerForm').serialize(); // e.preventDefault();
-
+    var data = $('#registerForm').serialize();
+    e.preventDefault();
     $.ajax({
       type: "post",
       url: "/api/auth/register",
@@ -713,31 +735,8 @@ $(document).ready(function () {
       success: function success(data) {
         console.log(data);
         window.localStorage.setItem('access_token', data.access_token);
-        var x = document.getElementById("login-btn-nav");
-
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-
-        var y = document.getElementById("register-btn-nav");
-
-        if (y.style.display === "none") {
-          y.style.display = "block";
-        } else {
-          y.style.display = "none";
-        }
-
-        var z = document.getElementById("myaccount-nav");
-
-        if (z.style.display === "none") {
-          z.style.display = "block";
-        } else {
-          z.style.display = "none";
-        }
-
         $('#loginModal').modal('hide');
+        location.reload();
       },
       error: function error(_error2) {
         console.log(_error2);

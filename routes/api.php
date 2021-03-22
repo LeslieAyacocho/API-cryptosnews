@@ -17,21 +17,23 @@ use App\Http\Controllers\BookmarkController;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-Route::post('/auth/register', [AuthController::class, 'register']);
+
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
 
 Route::post('/auth/login', [AuthController::class, 'login']);
-
-Route::resource('Crypto', CryptoController::class);
-Route::get('/crypto/{id}', [CryptoController::class, 'getUsers']);
-Route::get('/bookmarks/{id}', [BookmarkController::class, 'getUsers']);
-Route::resource('Bookmark', BookmarkController::class);
+Route::post('/auth/register', [AuthController::class, 'register']);
 
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('logout', [AuthController::class, 'logout']);
-    // Route::post('details', [AuthController::class, 'user_info']);
+    Route::post('details', [AuthController::class, 'user_info']);
+
+    Route::resource('Crypto', CryptoController::class);
+    Route::get('/crypto/{id}', [CryptoController::class, 'getUsers']);
+    Route::get('/bookmarks/{id}', [BookmarkController::class, 'getUsers']);
+    Route::resource('Bookmark', BookmarkController::class); 
 
 });

@@ -43,7 +43,10 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link link" id="myaccount-nav" style="color: #80ffdb;display:none;" data-id="myacc">My Account</a>
+                <a href="#" class="nav-link link" id="myaccount-nav" style="color: #80ffdb;" data-id="myacc">My Account</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link link" id="logout-nav" style="color: #80ffdb;" data-id="logout">Logout</a>
             </li>
             <li class="nav-item">
                 <button type="submit" id="login-btn-nav" style="color: #80ffdb;" class="btn  mr-sm-2" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button>
@@ -58,6 +61,10 @@
     </div>
 </nav>
         @yield('body')
+
+        
+        
+
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>   
 
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

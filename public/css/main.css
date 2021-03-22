@@ -6,8 +6,8 @@ body {
     
 }
 
-#contentpage{
-    align-content: center;
+.container{
+
 }
 
 
@@ -185,13 +185,13 @@ span i:hover{
     /* border: 1px solid #6930c3; */
 }
 #myaccNav li{
-  border: 2px solid #6930c3;
+    border: 2px solid #6930c3;
 }
 
 #myaccNav li:hover{
     border: 2px solid #80ffdb;
     background-color: #6930c3;
-  }
+}
 
 #myaccNav a{
     font-family: 'Cabin', sans-serif;;
