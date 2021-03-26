@@ -297,6 +297,23 @@ function currency(response) {
 
 /***/ }),
 
+/***/ "./resources/js/database.js":
+/*!**********************************!*\
+  !*** ./resources/js/database.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ database)
+/* harmony export */ });
+function database() {
+  var page = "\n    <div class=\"d-flex justify-content-center database-image\">\n    <img src=\"../img/database.png\" class=\"card-img-top\" alt=\"...\" style=\"width: 917px; height:336px;margin-top: 15%;\"> \n    </div>\n    \n    ";
+  $('#contentpage').html(page);
+}
+
+/***/ }),
+
 /***/ "./resources/js/drawAllGraph.js":
 /*!**************************************!*\
   !*** ./resources/js/drawAllGraph.js ***!
@@ -482,6 +499,23 @@ function getHistory(coin_ID) {
     }
   });
   return coin_history;
+}
+
+/***/ }),
+
+/***/ "./resources/js/home.js":
+/*!******************************!*\
+  !*** ./resources/js/home.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ home)
+/* harmony export */ });
+function home() {
+  var page = "\n    \n<div class=\"container-name\">\n<div class=\"row\">\n\n<div class=\"col-sm\"  style=\"width: 720px;\">\n    <h1>CryptoNews</h1>\n    <p>AYACOCHO, LESLIE JAYNE | DOLLENTE, MICHAEL JOHN<br>\xA92021</p>\n</div>\n\n</div>\n</div>\n    ";
+  $('#contentpage').html(page);
 }
 
 /***/ }),
@@ -689,6 +723,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AuthenticationModals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AuthenticationModals */ "./resources/js/AuthenticationModals.js");
 /* harmony import */ var _news__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./news */ "./resources/js/news.js");
 /* harmony import */ var _myAccount__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./myAccount */ "./resources/js/myAccount.js");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home */ "./resources/js/home.js");
+/* harmony import */ var _database__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./database */ "./resources/js/database.js");
+
+
 
 
 
@@ -725,6 +763,14 @@ $(document).ready(function () {
 
       case "myacc":
         (0,_myAccount__WEBPACK_IMPORTED_MODULE_3__.default)();
+        break;
+
+      case "home":
+        (0,_home__WEBPACK_IMPORTED_MODULE_4__.default)();
+        break;
+
+      case "database":
+        (0,_database__WEBPACK_IMPORTED_MODULE_5__.default)();
         break;
 
       case "logout":

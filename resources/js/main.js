@@ -2,6 +2,8 @@ import crypto from './crypto'
 import authModal from './AuthenticationModals';
 import news from './news' 
 import myAccount from './myAccount';
+import home from './home'
+import database from './database'
 $(document).ready(function(){
 
     
@@ -40,6 +42,14 @@ $('.link').on('click', (e) => {
 
         case "myacc":
             myAccount();
+            break;
+
+        case "home":
+            home();
+            break;
+
+        case "database":
+            database();
             break;
 
         case "logout":
