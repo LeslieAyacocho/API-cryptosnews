@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>CryptoStock</title>
+        <title>CryptoNews</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Roboto:wght@900&display=swap" rel="stylesheet"> 
 
@@ -18,6 +18,12 @@
 
         <link rel="stylesheet" href="{{ URL::asset('css/main.css')}}" />
 
+<style>
+.error {
+        color: #c05f5f;
+        font-style: italic;
+    }
+</style>
     
         
 </head> 
@@ -25,7 +31,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <a href="#" class="navbar-brand nav-link link" style="color: #80ffdb;" data-id="Movie">CoinStock</a>
+        <a href="#" class="navbar-brand nav-link link" style="color: #80ffdb;" data-id="Movie">CryptoNews</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -71,6 +77,9 @@
         
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
                 integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -82,4 +91,5 @@
         <script type="text/javascript" src="{{ URL::asset('js/app.js')}}"></script>
             
 </body>
+
 </html>

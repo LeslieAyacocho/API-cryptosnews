@@ -24,9 +24,11 @@ export default function myAccount(){
     $('#contentpage').html(pageContent);
 
     $('.acclink').on('click', (e) => {
-        var id = 1;
+        var id = localStorage.getItem('user_id');
         const link = e.currentTarget.dataset.id;
         // console.log(link);
+        
+
 
         $.ajax({
             type: "GET",
@@ -60,7 +62,3 @@ export default function myAccount(){
 
 
 }
-
-
-
-    

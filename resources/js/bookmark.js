@@ -1,6 +1,6 @@
 export default function bookmark(response){
 
-    
+    // console.log('bookmarks');
     let newsContent=`
     <div id="card-append">
         
@@ -11,29 +11,24 @@ export default function bookmark(response){
 
     var i = 0;
     var all_news_id = new Array();
-    response.forEach(data => {
-                            
+    response.forEach(data => {            
         all_news_id[i] = data.news;
-
         i++;
-
     });
-        
-        // console.log(all_news_id);
+
         $.ajax({
             type: 'GET',
             url: 'https://min-api.cryptocompare.com/data/v2/news'+
             '/?api_key=d3fb5e4f2e639187374967645a9ffdd24789d3d1884df5965fc36d5688046429',
             success: function (response) {
+            
                 let news = response.Data;
-                // console.log(getnews);
-                console.log(all_news_id);
 
                 for(let r=-1; r<all_news_id.length; r++){
                     news.forEach(element => {
                     
                         if (all_news_id[r] == element.id){
-                            // console.log('AAAAAAAAAA');
+                            console.log('AAAAAAAAAA');
                             var string = element.body;
                             var length =150;
                             var bodytrimmed = string.substring(0, length);
@@ -52,15 +47,12 @@ export default function bookmark(response){
                             </div>
                             `)
                         }
-                    
-                
                 });
                 }
-            
-                
 
-
-
+            },
+            error: function(error) {
+                console.log('error');
             }
         });
 

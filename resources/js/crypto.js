@@ -4,7 +4,7 @@ import showDetails from "./showDetails";
 import drawGraph from "./drawGraph";
 
 export default function crypto(type) {  
-            console.log("This is working...");
+            // console.log("This is working...");
 
 
             let tableContent=`
@@ -33,7 +33,7 @@ export default function crypto(type) {
             $.ajax({
                 method: 'GET',
                 url:
-                    'https://api.coinranking.com/v1/public/coins?base=PHP&limit=5',
+                    'https://api.coinranking.com/v1/public/coins?base=PHP',
             
                 // headers: {'x-access-token' : 'coinranking4a54ef6bb07419e96c653461240ac9f9ebe2c2d4db26a7d6'} ,
 
@@ -45,155 +45,165 @@ export default function crypto(type) {
                     var i = 0;
                     var x = -1;
                     var r= 0;
-                    console.log(data);
+                    // console.log(data);
 
                     var currency = new Intl.NumberFormat();
                     data.coins.forEach(element => {
 
-                        var coin_history = getHistory(element.id);
-                            
-                        all_coin_history[i] = coin_history;
+                    var coin_history = getHistory(element.id);
+                        
+                    all_coin_history[i] = coin_history;
 
-                        i++;
-                    
-                        $('#cryptoCoin').append(`
-                        <tr class="uuid" data-id="${element.id}" data-bs-toggle="modal" data-bs-target="#showDetails">
-                        <td> ${element.rank}</td>
-                        <td>
-                            <div 
-                            class="profilename_wrapper" >
-                        <div class="profile_logo">
-                            <img class="img" src="${element.iconUrl}">
+                    i++;
+                
+                    $('#cryptoCoin').append(`
+                    <tr class="uuid" data-id="${element.id}" data-bs-toggle="modal" data-bs-target="#showDetails">
+                    <td> ${element.rank}</td>
+                    <td>
+                        <div 
+                        class="profilename_wrapper" >
+                    <div class="profile_logo">
+                        <img class="img" src="${element.iconUrl}">
+                    </div>
+                            <span class="profile_name"> 
+                            <a class="currencylink" href="#"> ${element.name}</a>
+                            <p class="profile_symbol"> ${element.symbol}</p>
+                            </span>
                         </div>
-                                <span class="profile_name"> 
-                                <a class="currencylink" href="#"> ${element.name}</a>
-                                <p class="profile_symbol"> ${element.symbol}</p>
-                                </span>
-                            </div>
-                        </td>
-                        <td>${data.base.sign} ${ currency.format(element.price)}</td>
-                        <td>${data.base.sign} ${currency.format(element.marketCap)}</td>
+                    </td>
+                    <td>${data.base.sign} ${ currency.format(element.price)}</td>
+                    <td>${data.base.sign} ${currency.format(element.marketCap)}</td>
+                
+                    <td id="chart_div${r}"></td>
                     
-                        <td id="chart_div${r}"></td>
-                        
-                        
-                        </tr>
-                        `)
-                        x++;
-                        all_coin_change[x] = element.change;
-                        r++;
-                        drawAllGraph(all_coin_history,all_coin_change);
+                    
+                    </tr>
+                    `)
+                    x++;
+                    all_coin_change[x] = element.change;
+                    r++;
+                    drawAllGraph(all_coin_history,all_coin_change);
+                });
+
+                $('#showDetails').on('show.bs.modal', function(e) {
+                    var each_coin_history = new Array();
+                    var each_news= new Array();
+
+                    var id = $(e.relatedTarget).attr('data-id');
+                    
+                    $.ajax({
+                        method: 'GET',
+                    url:
+                        'https://api.coinranking.com/v1/public/coin/'+ id +'/history/24h?base=PHP',
+                    success: function (response) {
+
+                        var historydata = response.data;
+                        var i = -1;
+                    historydata.history.forEach(element => {
+                        i++
+                        each_coin_history[i]=[element.timestamp,parseFloat(element.price)];
+                        });
+                    drawGraph(each_coin_history);
+                    }
                     });
 
-                    $('#showDetails').on('show.bs.modal', function(e) {
-                        var each_coin_history = new Array();
-                        var id = $(e.relatedTarget).attr('data-id');
-                        
-                        $.ajax({
-                            method: 'GET',
-                        url:
-                            'https://api.coinranking.com/v1/public/coin/'+ id +'/history/24h?base=PHP',
-                        success: function (response) {
+                    $.ajax({
+                        method: 'GET',
+                    url:
+                        'https://api.coinranking.com/v1/public/coin/'+ id +'/history/24h?base=PHP',
+                    success: function (response) {
 
-                            var historydata = response.data;
-                            var i = -1;
-                        historydata.history.forEach(element => {
-                            i++
-                            each_coin_history[i]=[element.timestamp,parseFloat(element.price)];
-                            });
-                        drawGraph(each_coin_history);
-                        }
+                        var historydata = response.data;
+                        var i = -1;
+                    historydata.history.forEach(element => {
+                        i++
+                        each_coin_history[i]=[element.timestamp,parseFloat(element.price)];
                         });
+                    drawGraph(each_coin_history);
+                    }
+                    });
 
-                        $.ajax({
-                            method: 'GET',
-                        url:
-                            'https://api.coinranking.com/v1/public/coin/'+id+'?base=PHP',
-                        success: function (response) {
-                            let data = response.data
-                            var change;
+                    $.ajax({
+                        method: 'GET',
+                    url:
+                        'https://api.coinranking.com/v1/public/coin/'+id+'?base=PHP',
+                    success: function (response) {
+                        let data = response.data
+                        var change;
 
-                            if(data.coin.change>0){
-                                change = '+' + data.coin.change;
-                            }
-                            else{
-                                change = data.coin.change;
-                            }
-                                let details = `
-                                
-                                <div class="col-8 col-sm-6" id ="detail"><label>PRICE:</label><br>${data.base.sign} ${ currency.format(parseFloat(data.coin.price))}</div>
-                                <div class="col-8 col-sm-6" id ="detail"><label>CHANGE:</label><br>${change}</div>
-                                
-                                `;
-                            $('.modal-header').html(`
-                            <div class="modal-wrapper" >
-                                <div class="modal-logo">
-                                    <img class="img" src="${data.coin.iconUrl}">
-                                </div>
-                                    <span class="modal_coinname"> 
-                                    <h2> ${data.coin.name}</h2>
-                                    <p class="modal_coinsymbol"> ${data.coin.symbol}</p>
-                                    </span>
-                            </div>
+                        if(data.coin.change>0){
+                            change = '+' + data.coin.change;
+                        }
+                        else{
+                            change = data.coin.change;
+                        }
+                            let details = `
                             
-                            `);
-                            $('#detail_other').html(details);
-                        }
-                        
-                        });
-
-                        $('.modal-footer').html(`
-                        <button type="submit" class="btn followCoin" style="background-color:#6930c3; color:#80ffdb;" data-id="${id}"><i class="fas fa-plus-circle"></i></button>
-                        `);
-
-                        $('.followCoin').on('click', (e) => {
-                            var id = $(e.currentTarget).attr('data-id');
-                            // console.log(id);
-
-                            var cryptoid = $(e.currentTarget).attr('data-id');
-                            console.log(cryptoid);
-                            var userid = 1;
-
-                            let datainput= `
-                            <form action="" id="followCrypto">
-                            <input type="text" id="cryptoid" name="cryptoid" value="${cryptoid}">
-                            <input type="text" id="user_id" name="user_id" value="${userid}">
-                            </form>
+                            <div class="col-8 col-sm-6" id ="detail"><label>PRICE:</label><br>${data.base.sign} ${ currency.format(parseFloat(data.coin.price))}</div>
+                            <div class="col-8 col-sm-6" id ="detail"><label>CHANGE:</label><br>${change}</div>
+                            
                             `;
-
-                            var data = $(datainput).serialize();
-                            console.log(data);
-
-                            $.ajax({
-                                
-                                type: "post",
-                                url: "/api/Crypto",
-                                data: data,
-                                headers: {
-                                    // 'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
-                                },
-                                dataType: "json",
-                                success: function(data) {
-                                    e.preventDefault();
-                                    console.log(data);
+                        $('.modal-header').html(`
+                        <div class="modal-wrapper" >
+                            <div class="modal-logo">
+                                <img class="img" src="${data.coin.iconUrl}">
+                            </div>
+                                <span class="modal_coinname"> 
+                                <h2> ${data.coin.name}</h2>
+                                <p class="modal_coinsymbol"> ${data.coin.symbol}</p>
+                                </span>
+                        </div>
                         
-                                },
-                                error: function(error) {
-                                    console.log('error');
-                                }
-                            });
-                        });
+                        `);
+                        $('#detail_other').html(details);
+                    }
+                    
                     });
 
+                    $('.modal-footer').html(`
+                    <button type="submit" class="btn followCoin" style="background-color:#6930c3; color:#80ffdb;" data-id="${id}"><i class="fas fa-plus-circle"></i></button>
+                    `);
+
+                    $('.followCoin').on('click', (e) => {
+                        var id = $(e.currentTarget).attr('data-id');
+
+                        var cryptoid = $(e.currentTarget).attr('data-id');
+                        // console.log(cryptoid);
+                        var userid = localStorage.getItem('user_id');
+
+                        let datainput= `
+                        <form action="" id="followCrypto">
+                        <input type="text" id="cryptoid" name="cryptoid" value="${cryptoid}">
+                        <input type="text" id="user_id" name="user_id" value="${userid}">
+                        </form>
+                        `;
+
+                        var data = $(datainput).serialize();
+                        // console.log(data);
+
+                        $.ajax({
+                            
+                            type: "post",
+                            url: "/api/Crypto",
+                            data: data,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                            },
+                            dataType: "json",
+                            success: function(data) {
+                                e.preventDefault();
+                                // console.log(data);
                     
-        
-                    // $(".followCoin").on("click", function(e) {
-                                        
-                    //     
-                    // });
+                            },
+                            error: function(error) {
+                                // console.log('error');
+                                alert('Login first to follow')
+                            }
+                        });
+                    });
+                });
+
                 }
             });
-        
-        
 
 }

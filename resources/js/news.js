@@ -1,5 +1,5 @@
 export default function news() {  
-    console.log("This is working.");
+    // console.log("This is working.");
 
     let newsContent=`
     <div class="" id="card-append">
@@ -39,8 +39,8 @@ export default function news() {
             $('.bookmarknews').on('click', (e) => {
                 
                 var newsid = $(e.currentTarget).attr('data-id');
-                console.log(newsid);
-                var userid = 1;
+                // console.log(newsid);
+                var userid = localStorage.getItem('user_id');
 
                     let datainput= `
                     <form action="" id="addBookmark">
@@ -50,7 +50,7 @@ export default function news() {
                     `;
 
                     var data = $(datainput).serialize();
-                    console.log(data);
+                    // console.log(data);
 
                     $.ajax({
                         
@@ -58,16 +58,16 @@ export default function news() {
                         url: "/api/Bookmark",
                         data: data,
                         headers: {
-                            // 'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                            'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                         },
                         dataType: "json",
                         success: function(data) {
                             e.preventDefault();
-                            console.log(data);
+                            // console.log(data);
                 
                         },
                         error: function(error) {
-                            console.log('error');
+                            alert('Login first to bookmark news')
                         }
                     });
 
@@ -76,5 +76,4 @@ export default function news() {
 	})
 }
 
-{/* <p class="card-text">#${element.id}</p> */}
 

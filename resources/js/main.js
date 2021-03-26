@@ -27,7 +27,7 @@ $(document).ready(function(){
 
 $('.link').on('click', (e) => {
     const link = e.currentTarget.dataset.id;
-    console.log(link)
+    // console.log(link)
 
     switch (link) {
         case "crypto":
@@ -44,6 +44,7 @@ $('.link').on('click', (e) => {
 
         case "logout":
                 localStorage.removeItem("access_token");
+                localStorage.removeItem("user_id");
                 location.reload();
             break;
 
@@ -57,23 +58,23 @@ $('.link').on('click', (e) => {
 $('#contentpage').append(authModal); 
 
     // REGISTRATION
-// $('#registerForm').validate({
-// rules: {
-//     name: {required:true},
-//     email: {  required:true, email:true },
-//     password: { required:true },
-// },
-// messages: {
-//     name: {required:'required',},
-//     email: { required:'required'},
-//     password: { required:'required'},
-// },
-//     errorPlacement: function(error, element){
-//         error.insertAfter(element)
-// },
-// submitHandler: function(form,e) {
+$('#registerForm').validate({
+rules: {
+    name: {required:true},
+    email: {  required:true, email:true },
+    password: { required:true },
+},
+messages: {
+    name: {required:'required',},
+    email: { required:'required'},
+    password: { required:'required'},
+},
+    errorPlacement: function(error, element){
+        error.insertAfter(element)
+},
+submitHandler: function(form,e) {
 
-    $('#registerBtn').on('click', (e) => {
+    // $('#registerBtn').on('click', (e) => {
         var data = $('#registerForm').serialize();
         e.preventDefault();
         $.ajax({
@@ -84,7 +85,7 @@ $('#contentpage').append(authModal);
             dataType: "json",
             success: function(data) {
                 
-                console.log(data);
+                // console.log(data);
                 $('#registerModal').each(function () {
                 $(this).modal('hide');
                 });
@@ -93,27 +94,29 @@ $('#contentpage').append(authModal);
                 console.log('error');
             }
         });
+    }
 
-    });
+});
 
 
 
 //LOGIN
-    // $('#loginForm').validate({
-    //     rules: {
-    //     lemail: {  required:true, email:true },
-    //     lpassword: { required:true },
-    //     },
-    //     messages: {
-    //         lemail: { required:'required', email:'Enter Valid Email'},
-    //         lpassword: { required:'required'},
-    //     },
-    //         errorPlacement: function(error, element){
-    //             error.insertAfter(element)
-    //     },
-    //     submitHandler: function(form,e) {
-        $('#loginBtn').on('click', (e) => {
+    $('#loginForm').validate({
+        rules: {
+        lemail: {  required:true, email:true },
+        lpassword: { required:true },
+        },
+        messages: {
+            lemail: { required:'required', email:'Enter Valid Email'},
+            lpassword: { required:'required'},
+        },
+            errorPlacement: function(error, element){
+                error.insertAfter(element)
+        },
+        submitHandler: function(form,e) {
+        // $('#loginBtn').on('click', (e) => {
             var data = $('#loginForm').serialize();
+            // console.log(data);
             e.preventDefault();
                 $.ajax({
                     type: "post",
@@ -125,22 +128,22 @@ $('#contentpage').append(authModal);
                         
                         console.log(data);
                         window.localStorage.setItem('access_token', data.access_token);
+                        window.localStorage.setItem('user_id', data.user_id[0].id);
 
-                    
                         $('#loginModal').modal('hide');
                         location.reload();
+
                     },
                     error: function(error) {
                         console.log(error);
                         alert('Failed to login. Please Try again');
                     }
                 });
-
+            
+            }
 
         });
         
-    //     }
-    // });
     
 
 });

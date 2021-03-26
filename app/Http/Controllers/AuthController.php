@@ -37,11 +37,17 @@ class AuthController extends Controller
                 throw new \Exception('Error in Login');
             }
 
+            $userid = User::orderBy('id')
+            ->select('id')
+            ->where('email', '=', $request->email)
+            ->get();
+
             $tokenResult = $user->createToken('authToken')->plainTextToken;
             return response()->json([
                 'status_code' => 200,
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
+                'user_id' => $userid,
             ]);
 
         } catch (Exception $error) {
@@ -49,6 +55,7 @@ class AuthController extends Controller
                 'status_code' => 500,
                 'message' => 'Error to login',
                 'error' => $error,
+                
             ]);
         }
     }
@@ -56,5 +63,13 @@ class AuthController extends Controller
     public function logout(Request $request){
         $request->user()->currentAccessToken()->delete();
 
+    }
+
+    public function getUserID($email)
+    {
+        $user = User::orderBy('id')
+        ->where('email', '=', $email)
+        ->get();
+        return response()->json($user);
     }
 }

@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::resource('Crypto', CryptoController::class);
     Route::get('/crypto/{id}', [CryptoController::class, 'getUsers']);
     Route::get('/bookmarks/{id}', [BookmarkController::class, 'getUsers']);
+    Route::get('/auth/{email}', [AuthController::class, 'getUserID']);
     Route::resource('Bookmark', BookmarkController::class); 
 
 });
