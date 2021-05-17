@@ -11,18 +11,19 @@ Technologies used:
 -jQuery
 
 
-![alt text]()
+![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/main.PNG)
 
 
 ## Login and Register Modal
 
-![alt text]()
+![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/login.PNG)
+![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/register.PNG)
 
 ## CoinRaking Page
-![alt text]()
+![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/ranking.PNG)
 
 
 ## News Page
 
-![alt text]()
+![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/news.PNG)
 
