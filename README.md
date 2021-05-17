@@ -3,12 +3,12 @@
 CryptoNews is a system output for System Architecture and Integration Course (TUP-T 2021)
 
 Technologies used:
-- **Laravel 8
-- **API's (CoinRanking APi & CryptoCompare News API)
--**Bootstrap
--**Fontawesome
--**MySQL
--**jQuery
+- Laravel 8
+- API's (CoinRanking APi & CryptoCompare News API)
+- Bootstrap
+- Google Chart API
+- MySQL
+- jQuery
 
 
 ![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/main.PNG)
