@@ -14,11 +14,6 @@ Technologies used:
 ![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/main.PNG)
 
 
-## Login and Register Modal
-
-![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/login.PNG)
-![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/register.PNG)
-
 ## CoinRaking Page
 ![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/ranking.PNG)
 
@@ -26,4 +21,10 @@ Technologies used:
 ## News Page
 
 ![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/news.PNG)
+
+## Login and Register Modal
+
+![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/login.PNG)
+![alt text](https://github.com/LeslieAyacocho/API-cryptosnews/blob/main/images/register.PNG)
+
 
