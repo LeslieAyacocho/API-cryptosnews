@@ -14,8 +14,9 @@ export default function news() {
             '/?api_key=d3fb5e4f2e639187374967645a9ffdd24789d3d1884df5965fc36d5688046429',
             success: function (response) {
                 let data = response.Data
+                
                 data.forEach(element => {
-
+                    console.log(data);
                     var string = element.body;
                     var length =150;
                     var bodytrimmed = string.substring(0, length);
@@ -50,7 +51,7 @@ export default function news() {
                     `;
 
                     var data = $(datainput).serialize();
-                    // console.log(data);
+                    console.log(data);
 
                     $.ajax({
                         
@@ -63,7 +64,7 @@ export default function news() {
                         dataType: "json",
                         success: function(data) {
                             e.preventDefault();
-                            // console.log(data);
+                            console.log(data);
                 
                         },
                         error: function(error) {

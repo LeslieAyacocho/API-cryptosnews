@@ -33,10 +33,7 @@ export default function crypto(type) {
             $.ajax({
                 method: 'GET',
                 url:
-                    'https://api.coinranking.com/v1/public/coins?base=PHP',
-            
-                // headers: {'x-access-token' : 'coinranking4a54ef6bb07419e96c653461240ac9f9ebe2c2d4db26a7d6'} ,
-
+                    'https://api.coinranking.com/v1/public/coins?base=PHP&limit=6',
                 success: function (response) {
                     let data = response.data
                     var all_coin_history = new Array();

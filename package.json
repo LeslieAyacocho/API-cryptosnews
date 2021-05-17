@@ -17,6 +17,8 @@
     },
     "dependencies": {
         "chart.js": "^2.9.4",
-        "currency.js": "^2.0.3"
+        "currency.js": "^2.0.3",
+        "laravel": "0.0.1",
+        "mix": "0.0.1"
     }
 }

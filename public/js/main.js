@@ -47,7 +47,6 @@ function bookmark(response) {
       var _loop = function _loop(r) {
         news.forEach(function (element) {
           if (all_news_id[r] == element.id) {
-            console.log('AAAAAAAAAA');
             var string = element.body;
             var length = 150;
             var bodytrimmed = string.substring(0, length);
@@ -93,8 +92,7 @@ function crypto(type) {
   $('#contentpage').append(_showDetails__WEBPACK_IMPORTED_MODULE_2__.default);
   $.ajax({
     method: 'GET',
-    url: 'https://api.coinranking.com/v1/public/coins?base=PHP',
-    // headers: {'x-access-token' : 'coinranking4a54ef6bb07419e96c653461240ac9f9ebe2c2d4db26a7d6'} ,
+    url: 'https://api.coinranking.com/v1/public/coins?base=PHP&limit=6',
     success: function success(response) {
       var data = response.data;
       var all_coin_history = new Array();
@@ -283,6 +281,7 @@ function currency(response) {
           success: function success(response) {
             console.log(response.Data);
             var result = response.Data;
+            console.log(result);
             result.forEach(function (element) {
               if (element.tags = symbol_id) {
                 $('#card-append-acc').append("\n                        <div class=\"card col\"  style=\"width: 750px;\">\n                            <img src=\"".concat(element.imageurl, "\" class=\"card-img-top\" alt=\"...\" style=\"width: 750px;\"> \n                            <div class=\"card-body\">\n                                <h5 class=\"card-title\"><a href=\"#\" target=\"_blank\">").concat(element.title, "</a></h5>\n                                <p class=\"card-text\">").concat(element.body, "</p>\n                                <input type=\"hidden\" id=\"tags\" name=\"tags\" id=\"").concat(element.tags, "\" >\n                            </div>\n                            <div class=\"card-footer\">\n                            <a href=\"").concat(element.url, "\" target=\"_blank\"><button type=\"button\" class=\"btn\" style=\"background-color:#6930c3; color:#80ffdb\">READ MORE</button></a>\n                            \n                            </div>\n                        </div>\n                        "));
@@ -591,6 +590,7 @@ function news() {
     success: function success(response) {
       var data = response.Data;
       data.forEach(function (element) {
+        console.log(data);
         var string = element.body;
         var length = 150;
         var bodytrimmed = string.substring(0, length);

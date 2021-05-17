@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-// use Carbon\Carbon;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------

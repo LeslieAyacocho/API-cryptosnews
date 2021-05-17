@@ -28,7 +28,6 @@ export default function bookmark(response){
                     news.forEach(element => {
                     
                         if (all_news_id[r] == element.id){
-                            console.log('AAAAAAAAAA');
                             var string = element.body;
                             var length =150;
                             var bodytrimmed = string.substring(0, length);

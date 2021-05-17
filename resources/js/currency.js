@@ -152,7 +152,7 @@ export default function currency(response){
 
                     console.log(response.Data);
                     var result = response.Data
-
+                    console.log(result);
                     result.forEach(element => {
                         
                         if(element.tags = symbol_id){
